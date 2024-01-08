@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>12.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Authors>Anton Moldovan</Authors>
+        <Company>NBomber</Company>
+        <Copyright>NBomber@2024</Copyright>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageIcon>nbomber_icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/PragmaticFlow/NBomber.WebSockets</RepositoryUrl>
+        <PackageTags>websockets, load-testing, performance-testing, integration-testing, fsharp</PackageTags>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <Description>NBomber plugin for defining WebSockets scenarios</Description>
+        <Title>NBomber.WebSockets</Title>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../LICENSE" Pack="true" Visible="false" PackagePath="" />
+        <None Include="../../assets/nbomber_icon.png" Pack="true" Visible="false" PackagePath="" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.0" />
+    </ItemGroup>
+
+</Project>
