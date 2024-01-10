@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBomber.WebSockets", "src\NBomber.WebSockets\NBomber.WebSockets.csproj", "{D51D0751-127B-4B98-A19F-8B9DE2EC9307}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{2319DDA6-63D4-4876-84DC-C3E9A2D24440}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "examples\Demo\Demo.csproj", "{0280829A-3011-4CAF-81F9-92880A54ECB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Server", "examples\Demo.Server\Demo.Server.csproj", "{9F842FA5-8DD0-462A-BE1C-66CBEDD92FB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{D51D0751-127B-4B98-A19F-8B9DE2EC9307}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51D0751-127B-4B98-A19F-8B9DE2EC9307}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51D0751-127B-4B98-A19F-8B9DE2EC9307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0280829A-3011-4CAF-81F9-92880A54ECB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0280829A-3011-4CAF-81F9-92880A54ECB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0280829A-3011-4CAF-81F9-92880A54ECB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0280829A-3011-4CAF-81F9-92880A54ECB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F842FA5-8DD0-462A-BE1C-66CBEDD92FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F842FA5-8DD0-462A-BE1C-66CBEDD92FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F842FA5-8DD0-462A-BE1C-66CBEDD92FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F842FA5-8DD0-462A-BE1C-66CBEDD92FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0280829A-3011-4CAF-81F9-92880A54ECB9} = {2319DDA6-63D4-4876-84DC-C3E9A2D24440}
+		{9F842FA5-8DD0-462A-BE1C-66CBEDD92FB5} = {2319DDA6-63D4-4876-84DC-C3E9A2D24440}
 	EndGlobalSection
 EndGlobal
