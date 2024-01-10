@@ -64,7 +64,10 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     }
 }
 
-public class WebSocketResponse(RecyclableMemoryStream memoryStream, WebSocketMessageType messageType) : IDisposable
+/// <summary>
+/// Represents a response from a WebSocket. After usage the instance should be disposed.
+/// </summary>
+public readonly struct WebSocketResponse(RecyclableMemoryStream memoryStream, WebSocketMessageType messageType) : IDisposable
 {
     public ReadOnlyMemory<byte> Data { get; } = memoryStream.GetBuffer().AsMemory(0, (int)memoryStream.Length);
     public WebSocketMessageType MessageType { get; } = messageType;
