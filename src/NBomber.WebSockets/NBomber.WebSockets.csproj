@@ -14,7 +14,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>nbomber_icon.png</PackageIcon>
         <RepositoryUrl>https://github.com/PragmaticFlow/NBomber.WebSockets</RepositoryUrl>
-        <PackageTags>websockets, load-testing, performance-testing, integration-testing, fsharp</PackageTags>
+        <PackageTags>websockets, load-testing, performance-testing, integration-testing</PackageTags>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Description>NBomber plugin for defining WebSockets scenarios</Description>
         <Title>NBomber.WebSockets</Title>
