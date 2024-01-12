@@ -25,7 +25,7 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public async ValueTask<WebSocketResponse> Receive(CancellationToken? cancellationToken = null)
+    public async ValueTask<WebSocketResponse> Receive(CancellationToken cancellationToken = default)
     {
         var endOfMessage = false;
         var ms = MsStreamManager.GetStream();
@@ -36,7 +36,7 @@ public class WebSocket(WebSocketConfig config) : IDisposable
             while (!endOfMessage)
             {
                 var buffer = ms.GetMemory(config.DefaultBufferSize);
-                var message = await Client.ReceiveAsync(buffer, cancellationToken ?? CancellationToken.None).ConfigureAwait(false);
+                var message = await Client.ReceiveAsync(buffer, cancellationToken).ConfigureAwait(false);
 
                 if (message.MessageType == WebSocketMessageType.Close)
                 {

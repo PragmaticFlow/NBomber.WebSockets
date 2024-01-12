@@ -15,9 +15,9 @@ public static class WebSocketExtensions
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public static Task Connect(this WebSocket webSocket, string url, CancellationToken? cancellationToken = null)
+    public static Task Connect(this WebSocket webSocket, string url, CancellationToken cancellationToken = default)
     {
-        return webSocket.Client.ConnectAsync(new Uri(url), cancellationToken ?? CancellationToken.None);
+        return webSocket.Client.ConnectAsync(new Uri(url), cancellationToken);
     }
 
     /// <summary>
@@ -27,9 +27,9 @@ public static class WebSocketExtensions
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public static Task Connect(this WebSocket webSocket, Uri uri, CancellationToken? cancellationToken = null)
+    public static Task Connect(this WebSocket webSocket, Uri uri, CancellationToken cancellationToken = default)
     {
-        return webSocket.Client.ConnectAsync(uri, cancellationToken ?? CancellationToken.None);
+        return webSocket.Client.ConnectAsync(uri, cancellationToken);
     }
 
     /// <summary>
@@ -39,9 +39,9 @@ public static class WebSocketExtensions
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public static Task Close(this WebSocket webSocket, WebSocketCloseStatus? closeStatus = null, CancellationToken? cancellationToken = null)
+    public static Task Close(this WebSocket webSocket, WebSocketCloseStatus? closeStatus = null, CancellationToken cancellationToken = default)
     {
-        return webSocket.Client.CloseAsync(closeStatus ?? WebSocketCloseStatus.NormalClosure, null, cancellationToken ?? CancellationToken.None);
+        return webSocket.Client.CloseAsync(closeStatus ?? WebSocketCloseStatus.NormalClosure, null, cancellationToken);
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public static class WebSocketExtensions
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public static ValueTask Send(this WebSocket webSocket, string text, CancellationToken? cancellationToken = null)
+    public static ValueTask Send(this WebSocket webSocket, string text, CancellationToken cancellationToken = default)
     {
         using var ms = MsStreamManager.GetStream();
 
@@ -61,7 +61,7 @@ public static class WebSocketExtensions
 
         var msg = ms.GetBuffer().AsMemory(0, (int) ms.Length);
 
-        return webSocket.Client.SendAsync(msg, WebSocketMessageType.Text, true, cancellationToken ?? CancellationToken.None);
+        return webSocket.Client.SendAsync(msg, WebSocketMessageType.Text, true, cancellationToken);
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public static class WebSocketExtensions
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public static ValueTask Send(this WebSocket webSocket, ReadOnlyMemory<byte> payload, CancellationToken? cancellationToken = null)
+    public static ValueTask Send(this WebSocket webSocket, ReadOnlyMemory<byte> payload, CancellationToken cancellationToken = default)
     {
-        return webSocket.Client.SendAsync(payload, WebSocketMessageType.Binary, true, cancellationToken ?? CancellationToken.None);
+        return webSocket.Client.SendAsync(payload, WebSocketMessageType.Binary, true, cancellationToken);
     }
 }
