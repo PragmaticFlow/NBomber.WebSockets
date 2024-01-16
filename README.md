@@ -2,10 +2,11 @@
 [![build](https://github.com/PragmaticFlow/NBomber.WebSockets/actions/workflows/build.yml/badge.svg)](https://github.com/PragmaticFlow/NBomber.WebSockets/actions/workflows/build.yml)
 [![NuGet](https://img.shields.io/nuget/v/nbomber.websockets.svg)](https://www.nuget.org/packages/nbomber.websockets/)
 
-NBomber plugin for defining WebSockets scenarios. **WebSocket** is wrapper over native [ClientWebSocket](https://learn.microsoft.com/en-us/dotnet/api/system.net.websockets.clientwebsocket?view=net-8.0) that provides extenions to simplify WebSockets handling:
+NBomber plugin for defining WebSockets scenarios. `WebSocket` is wrapper over native [ClientWebSocket](https://learn.microsoft.com/en-us/dotnet/api/system.net.websockets.clientwebsocket?view=net-8.0) that provides extenions to simplify WebSockets handling:
 
-- **Send** and **Receive** methods use reusable memory pools to reduce memory allocations.
-- **Receive** method follows Pull-based semantics that simplifies writing load test scenarios due to the liner composition of the request/response handling.
+- `Send` and `Receive` methods use reusable memory pools to reduce memory allocations.
+- `Receive` method follows Pull-based semantics that simplifies writing load test scenarios due to the liner composition of the request/response handling.
+- `Receive` method returns `WebSocketResponse` that should be disposed of after usage.
 
 <!-- ### Documentation
 Documentation is located [here](https://nbomber.com/docs/protocols/http) -->
