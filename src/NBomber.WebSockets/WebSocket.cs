@@ -19,7 +19,7 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     public ClientWebSocket Client { get; } = new();
 
     /// <summary>
-    /// Asynchronously receives a WebSocket message from the connected WebSocket.
+    /// This method should be used to receive a WebSocket message from the connected WebSocket asynchronously. 
     /// This method returns <see cref="WebSocketResponse"/> that should be disposed of after usage.
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>

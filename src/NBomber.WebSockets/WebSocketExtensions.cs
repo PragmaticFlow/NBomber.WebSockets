@@ -9,7 +9,7 @@ public static class WebSocketExtensions
     private static readonly RecyclableMemoryStreamManager MsStreamManager = new();
 
     /// <summary>
-    /// Connects to a WebSocket server as an asynchronous operation.
+    /// This method should be used to connect to a WebSocket server asynchronously.
     /// </summary>
     /// <param name="url">The URL of the WebSocket server to connect to.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
@@ -21,7 +21,7 @@ public static class WebSocketExtensions
     }
 
     /// <summary>
-    /// Connects to a WebSocket server as an asynchronous operation.
+    /// This method should be used to connect to a WebSocket server asynchronously.
     /// </summary>
     /// <param name="uri">The URI of the WebSocket server to connect to.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
@@ -33,19 +33,19 @@ public static class WebSocketExtensions
     }
 
     /// <summary>
-    /// Close the WebSocket instance as an asynchronous operation.
+    /// This method should be used to close WebSocket connection asynchronously.
     /// </summary>
     /// <param name="closeStatus">The WebSocket close status.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public static Task Close(this WebSocket webSocket, WebSocketCloseStatus? closeStatus = null, CancellationToken cancellationToken = default)
+    public static Task Close(this WebSocket webSocket, WebSocketCloseStatus closeStatus = WebSocketCloseStatus.NormalClosure, CancellationToken cancellationToken = default)
     {
-        return webSocket.Client.CloseAsync(closeStatus ?? WebSocketCloseStatus.NormalClosure, null, cancellationToken);
+        return webSocket.Client.CloseAsync(closeStatus, null, cancellationToken);
     }
 
     /// <summary>
-    /// Sends data on WebSocket as an asynchronous operation.
+    /// This method should be used to send data on WebSocket asynchronously.
     /// </summary>
     /// <param name="text">The text to be sent. It will be encoded using UTF8 encoding.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
@@ -65,7 +65,7 @@ public static class WebSocketExtensions
     }
 
     /// <summary>
-    /// Sends data on WebSocket as an asynchronous operation.
+    /// This method should be used to send data on WebSocket asynchronously.
     /// </summary>
     /// <param name="payload">The binary payload to be sent.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
