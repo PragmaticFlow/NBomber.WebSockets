@@ -1,6 +1,7 @@
 ﻿using System.Net.WebSockets;
 using System.Text;
 using Microsoft.IO;
+using NBomber.Contracts;
 
 namespace NBomber.WebSockets;
 
@@ -107,6 +108,11 @@ public class WebSocket(WebSocketConfig config) : IDisposable
             }
 
             return new WebSocketResponse(ms, msgType);
+        }
+        catch (OperationCanceledException ex)
+        {
+            ms.Dispose();
+            throw new IgnoreMeasurementException();
         }
         catch
         {
