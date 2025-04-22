@@ -136,7 +136,7 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     {
         try
         {
-            if (!_cts.IsCancellationRequested)
+            if (_cts.IsCancellationRequested)
                 throw new WebSocketException($"The client is not listening. The client State: {Client.State}");
                 
             var response = await _channel.Reader.ReadAsync(cancellationToken);
