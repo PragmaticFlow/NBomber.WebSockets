@@ -1,5 +1,6 @@
 ﻿using System.Net.WebSockets;
 using System.Text;
+using System.Threading.Channels;
 using Microsoft.IO;
 using NBomber.Contracts;
 
@@ -17,8 +18,54 @@ public class WebSocketConfig
 public class WebSocket(WebSocketConfig config) : IDisposable
 {
     private static readonly RecyclableMemoryStreamManager MsStreamManager = new();
-
+    private readonly Channel<WebSocketResponse> _channel = Channel.CreateUnbounded<WebSocketResponse>();
+    private readonly CancellationTokenSource _cts = new();
+    private bool _isListenUpdates = false;
+    
     public ClientWebSocket Client { get; } = new();
+
+    private async Task StartListenOnUpdates()
+    {
+        if (!_isListenUpdates)
+            _isListenUpdates = true;
+        else
+            return;
+        
+        while (!_cts.IsCancellationRequested)
+        {
+            var endOfMessage = false;
+            var ms = MsStreamManager.GetStream();
+            var msgType = WebSocketMessageType.Binary;
+            
+            try
+            {
+                while (!endOfMessage)
+                {
+                    var buffer = ms.GetMemory(config.DefaultBufferSize);
+                    var message = await Client.ReceiveAsync(buffer, _cts.Token);
+
+                    if (message.MessageType == WebSocketMessageType.Close)
+                    {
+                        _channel.Writer.TryWrite(new WebSocketResponse(ms, WebSocketMessageType.Close));
+                        _cts.Cancel();
+                    }
+
+                    ms.Advance(message.Count);
+
+                    endOfMessage = message.EndOfMessage;
+                    msgType = message.MessageType;
+                }
+                
+                _channel.Writer.TryWrite(new WebSocketResponse(ms, msgType));
+            }
+            catch
+            {
+                ms.Dispose();
+                _cts.Cancel();
+                throw;
+            }
+        }
+    }
 
     /// <summary>
     /// This method should be used to connect to a WebSocket server asynchronously.
@@ -27,9 +74,10 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public Task Connect(string url, CancellationToken cancellationToken = default)
+    public async Task Connect(string url, CancellationToken cancellationToken = default)
     {
-        return Client.ConnectAsync(new Uri(url), cancellationToken);
+        await Client.ConnectAsync(new Uri(url), cancellationToken);
+        _ = StartListenOnUpdates();
     }
 
     /// <summary>
@@ -39,9 +87,10 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public Task Connect(Uri uri, CancellationToken cancellationToken = default)
+    public async Task Connect(Uri uri, CancellationToken cancellationToken = default)
     {
-        return Client.ConnectAsync(uri, cancellationToken);
+        await Client.ConnectAsync(uri, cancellationToken);
+        _ = StartListenOnUpdates();
     }
     
     /// <summary>
@@ -85,39 +134,17 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
     public async ValueTask<WebSocketResponse> Receive(CancellationToken cancellationToken = default)
     {
-        var endOfMessage = false;
-        var ms = MsStreamManager.GetStream();
-        var msgType = WebSocketMessageType.Binary;
-
         try
         {
-            while (!endOfMessage)
-            {
-                var buffer = ms.GetMemory(config.DefaultBufferSize);
-                var message = await Client.ReceiveAsync(buffer, cancellationToken).ConfigureAwait(false);
-
-                if (message.MessageType == WebSocketMessageType.Close)
-                {
-                    return new WebSocketResponse(ms, WebSocketMessageType.Close);
-                }
-
-                ms.Advance(message.Count);
-
-                endOfMessage = message.EndOfMessage;
-                msgType = message.MessageType;
-            }
-
-            return new WebSocketResponse(ms, msgType);
+            if (!_cts.IsCancellationRequested)
+                throw new WebSocketException($"The client is not listening. The client State: {Client.State}");
+                
+            var response = await _channel.Reader.ReadAsync(cancellationToken);
+            return response;
         }
-        catch (OperationCanceledException ex)
+        catch (OperationCanceledException)
         {
-            ms.Dispose();
             throw new IgnoreMeasurementException();
-        }
-        catch
-        {
-            ms.Dispose();
-            throw;
         }
     }
     
@@ -128,14 +155,16 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to propagate notification that the operation should be canceled.</param>
     /// <exception cref="WebSocketException">Thrown when an error occurs during WebSocket communication.</exception>
     /// <exception cref="OperationCanceledException">Thrown if the receive operation is canceled by the provided cancellation token.</exception>
-    public Task Close(WebSocketCloseStatus closeStatus = WebSocketCloseStatus.NormalClosure, CancellationToken cancellationToken = default)
+    public async Task Close(WebSocketCloseStatus closeStatus = WebSocketCloseStatus.NormalClosure, CancellationToken cancellationToken = default)
     {
-        return Client.CloseAsync(closeStatus, null, cancellationToken);
+        await Client.CloseAsync(closeStatus, null, cancellationToken);
+        _cts.Cancel();
     }
 
     public void Dispose()
     {
         Client.Dispose();
+        _cts.Cancel();
     }
 }
 
