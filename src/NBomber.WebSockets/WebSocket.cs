@@ -21,8 +21,10 @@ public class WebSocket(WebSocketConfig config) : IDisposable
     private readonly Channel<WebSocketResponse> _channel = Channel.CreateUnbounded<WebSocketResponse>();
     private readonly CancellationTokenSource _cts = new();
     private bool _isListenUpdates = false;
+    private long _msgReceivedCount;
     
     public ClientWebSocket Client { get; } = new();
+    public long MsgReceivedCount => _msgReceivedCount;
 
     private async Task StartListenOnUpdates()
     {
@@ -56,6 +58,7 @@ public class WebSocket(WebSocketConfig config) : IDisposable
                     msgType = message.MessageType;
                 }
                 
+                Interlocked.Increment(ref _msgReceivedCount);
                 _channel.Writer.TryWrite(new WebSocketResponse(ms, msgType));
             }
             catch
