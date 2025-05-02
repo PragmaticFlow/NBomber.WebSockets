@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "simulators", "simulators", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketsSimulator", "examples\WebSocketsSimulator\WebSocketsSimulator.csproj", "{46A32EDA-64C0-493E-91DD-F1E961AB16CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "examples\Demo\Demo.csproj", "{570BC395-3909-4782-9907-B8884CDF4144}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B9FB143E-EE4C-4A54-9EB2-582FDABC5DAE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{46A32EDA-64C0-493E-91DD-F1E961AB16CD} = {B9FB143E-EE4C-4A54-9EB2-582FDABC5DAE}
+		{570BC395-3909-4782-9907-B8884CDF4144} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE7E10B1-5819-4A63-94A7-DA4D10007B42}
