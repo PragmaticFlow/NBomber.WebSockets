@@ -1,0 +1,7 @@
+services:
+
+  websockets-simulator:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "5139:8080"

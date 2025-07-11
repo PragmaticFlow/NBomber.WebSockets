@@ -1,6 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBomber.WebSockets", "src\NBomber.WebSockets\NBomber.WebSockets.csproj", "{D51D0751-127B-4B98-A19F-8B9DE2EC9307}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "simulators", "simulators", "{B9FB143E-EE4C-4A54-9EB2-582FDABC5DAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketsSimulator", "examples\WebSocketsSimulator\WebSocketsSimulator.csproj", "{46A32EDA-64C0-493E-91DD-F1E961AB16CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "examples\Demo\Demo.csproj", "{570BC395-3909-4782-9907-B8884CDF4144}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EE0EB6BE-DECE-404F-A9C6-D418991A938E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBomber.WebSockets.Tests", "tests\NBomber.WebSockets.Tests\NBomber.WebSockets.Tests.csproj", "{230CCC53-5938-40EE-A808-0D29A2C60B76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{EE79065A-2614-411A-9AD6-6174B947C6CF}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,7 +32,29 @@ Global
 		{D51D0751-127B-4B98-A19F-8B9DE2EC9307}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51D0751-127B-4B98-A19F-8B9DE2EC9307}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51D0751-127B-4B98-A19F-8B9DE2EC9307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46A32EDA-64C0-493E-91DD-F1E961AB16CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570BC395-3909-4782-9907-B8884CDF4144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230CCC53-5938-40EE-A808-0D29A2C60B76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230CCC53-5938-40EE-A808-0D29A2C60B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230CCC53-5938-40EE-A808-0D29A2C60B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230CCC53-5938-40EE-A808-0D29A2C60B76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{B9FB143E-EE4C-4A54-9EB2-582FDABC5DAE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{46A32EDA-64C0-493E-91DD-F1E961AB16CD} = {B9FB143E-EE4C-4A54-9EB2-582FDABC5DAE}
+		{570BC395-3909-4782-9907-B8884CDF4144} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{230CCC53-5938-40EE-A808-0D29A2C60B76} = {EE0EB6BE-DECE-404F-A9C6-D418991A938E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE7E10B1-5819-4A63-94A7-DA4D10007B42}
 	EndGlobalSection
 EndGlobal
