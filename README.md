@@ -8,8 +8,7 @@ NBomber plugin for defining WebSockets scenarios. `WebSocket` is wrapper over na
 - `Receive` method follows Pull-based semantics that simplifies writing load test scenarios due to the liner composition of the request/response handling.
 - `Receive` method returns `WebSocketResponse` that should be disposed of after usage.
 
-<!-- ### Documentation
-Documentation is located [here](https://nbomber.com/docs/protocols/http) -->
+#### Documentation is located [here](https://nbomber.com/docs/protocols/websockets)
 
 ```csharp
 var scenario = Scenario.Create("web_sockets", async context =>
